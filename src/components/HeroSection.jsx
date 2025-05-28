@@ -1,39 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, memo } from "react";
 import { motion } from "framer-motion";
-import { FiGithub, FiLinkedin, FiMail, FiDownload } from "react-icons/fi";
+import { FiDownload } from "react-icons/fi";
 import { FaCode, FaLaptopCode } from "react-icons/fa";
 
-export default function HeroSection() {
+// Memoized floating code icon component
+const FloatingIcon = memo(({ icon: Icon, position, animationProps }) => (
+  <motion.div
+    className={`absolute ${position} text-gray-300`}
+    animate={animationProps.animate}
+    transition={animationProps.transition}
+  >
+    <Icon />
+  </motion.div>
+));
+
+// Memoized background blob component
+const BackgroundBlob = memo(({ className, style }) => (
+  <div
+    className={`absolute rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob ${className}`}
+    style={style}
+  ></div>
+));
+
+// Memoized TypeWriter effect component
+const TypeWriter = memo(({ phrases }) => {
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [cursorBlink, setCursorBlink] = useState(true);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  const phrases = [
-    "Web Developer 💻",
-    "MERN Stack Developer 🚀",
-    "Creative Problem Solver 🧠",
-    "Tech Explorer 🔍",
-    "UI/UX Enthusiast 🎨",
-    "Full-Stack Innovator 🧑‍💻",
-    "Code Craftsman 🛠️",
-    "Lifelong Learner 📚",
-    "API Integrator ⚙️",
-    "Open Source Contributor 🌐",
-  ];
-
-  // Handle mouse movement for parallax effect
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({
-        x: e.clientX / window.innerWidth - 0.5,
-        y: e.clientY / window.innerHeight - 0.5,
-      });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   // Cursor blinking effect
   useEffect(() => {
@@ -67,59 +61,157 @@ export default function HeroSection() {
     }
 
     return () => clearTimeout(timer);
-  }, [displayText, isDeleting, currentIndex]);
+  }, [displayText, isDeleting, currentIndex, phrases]);
+
+  return (
+    <span className="inline-block min-w-[300px]">
+      {displayText}
+      <span
+        className={`inline-block w-1 h-8 align-middle ml-1 ${
+          cursorBlink ? "opacity-100" : "opacity-0"
+        }`}
+        style={{ backgroundColor: "#0d9488" }}
+      ></span>
+    </span>
+  );
+});
+
+// Memoized button component
+const ActionButton = memo(({ primary, href, target, rel, children }) => {
+  const baseClasses =
+    "relative px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden";
+  const primaryClasses =
+    "bg-gradient-to-r from-teal-500 to-blue-600 text-white";
+  const secondaryClasses = "border-2 border-teal-500 text-teal-600";
+
+  return (
+    <motion.a
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      href={href}
+      target={target}
+      rel={rel}
+      className={`${baseClasses} ${
+        primary ? primaryClasses : secondaryClasses
+      }`}
+    >
+      {children}
+    </motion.a>
+  );
+});
+
+// Main component
+export default function HeroSection() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const phrases = [
+    "Web Developer 💻",
+    "MERN Stack Developer 🚀",
+    "Creative Problem Solver 🧠",
+    "Tech Explorer 🔍",
+    "UI/UX Enthusiast 🎨",
+    "Full-Stack Innovator 🧑‍💻",
+    "Code Craftsman 🛠️",
+    "Lifelong Learner 📚",
+    "API Integrator ⚙️",
+    "Open Source Contributor 🌐",
+  ];
+
+  // Handle mouse movement for parallax effect - with debounce
+  const handleMouseMove = useCallback((e) => {
+    requestAnimationFrame(() => {
+      setMousePosition({
+        x: e.clientX / window.innerWidth - 0.5,
+        y: e.clientY / window.innerHeight - 0.5,
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [handleMouseMove]);
+
+  // Animation variants
+  const headingVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
+  const fadeInVariants = {
+    hidden: { opacity: 0 },
+    visible: (custom) => ({
+      opacity: 1,
+      transition: { delay: custom * 0.3, duration: 0.8 },
+    }),
+  };
+
+  const buttonVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { delay: 0.9, duration: 0.8 },
+    },
+  };
 
   return (
     <section className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-gray-50 to-white px-4 pt-24 relative overflow-hidden">
       {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div
-          className="absolute top-20 left-20 w-64 h-64 bg-teal-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <BackgroundBlob
+          className="top-20 left-20 w-64 h-64 bg-teal-100"
           style={{
             transform: `translate(${mousePosition.x * 20}px, ${
               mousePosition.y * 20
             }px)`,
           }}
-        ></div>
-        <div
-          className="absolute bottom-20 right-20 w-72 h-72 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"
+        />
+        <BackgroundBlob
+          className="bottom-20 right-20 w-72 h-72 bg-blue-100 animation-delay-2000"
           style={{
             transform: `translate(${mousePosition.x * 30}px, ${
               mousePosition.y * 30
             }px)`,
           }}
-        ></div>
-        <div
-          className="absolute top-1/3 right-1/4 w-60 h-60 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"
+        />
+        <BackgroundBlob
+          className="top-1/3 right-1/4 w-60 h-60 bg-purple-100 animation-delay-4000"
           style={{
             transform: `translate(${mousePosition.x * 25}px, ${
               mousePosition.y * 25
             }px)`,
           }}
-        ></div>
+        />
       </div>
 
       {/* Floating code icons */}
-      <motion.div
-        className="absolute top-1/4 left-1/5 text-4xl text-gray-300"
-        animate={{ y: [0, -15, 0] }}
-        transition={{ duration: 5, repeat: Infinity }}
-      >
-        <FaCode />
-      </motion.div>
-      <motion.div
-        className="absolute bottom-1/3 right-1/4 text-5xl text-gray-300"
-        animate={{ y: [0, 15, 0] }}
-        transition={{ duration: 6, repeat: Infinity, delay: 1 }}
-      >
-        <FaLaptopCode />
-      </motion.div>
+      <FloatingIcon
+        icon={FaCode}
+        position="top-1/4 left-1/5 text-4xl"
+        animationProps={{
+          animate: { y: [0, -15, 0] },
+          transition: { duration: 5, repeat: Infinity },
+        }}
+      />
+      <FloatingIcon
+        icon={FaLaptopCode}
+        position="bottom-1/3 right-1/4 text-5xl"
+        animationProps={{
+          animate: { y: [0, 15, 0] },
+          transition: { duration: 6, repeat: Infinity, delay: 1 },
+        }}
+      />
 
       <div className="text-center max-w-4xl relative z-10">
         <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          variants={headingVariants}
+          initial="hidden"
+          animate="visible"
           className="text-5xl md:text-7xl font-bold text-gray-900 mb-4"
         >
           Hi, I'm{" "}
@@ -129,26 +221,20 @@ export default function HeroSection() {
         </motion.h1>
 
         <motion.h2
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
+          variants={fadeInVariants}
+          custom={1}
+          initial="hidden"
+          animate="visible"
           className="text-2xl md:text-3xl mt-6 text-gray-600 h-12 font-medium flex justify-center items-center"
         >
-          <span className="inline-block min-w-[300px]">
-            {displayText}
-            <span
-              className={`inline-block w-1 h-8 align-middle ml-1 ${
-                cursorBlink ? "opacity-100" : "opacity-0"
-              }`}
-              style={{ backgroundColor: "#0d9488" }}
-            ></span>
-          </span>
+          <TypeWriter phrases={phrases} />
         </motion.h2>
 
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
+          variants={fadeInVariants}
+          custom={2}
+          initial="hidden"
+          animate="visible"
           className="mt-8 text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed"
         >
           I craft{" "}
@@ -160,17 +246,12 @@ export default function HeroSection() {
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.8 }}
+          variants={buttonVariants}
+          initial="hidden"
+          animate="visible"
           className="mt-12 flex flex-col sm:flex-row justify-center gap-4"
         >
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            href="#projects"
-            className="relative bg-gradient-to-r from-teal-500 to-blue-600 text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden"
-          >
+          <ActionButton primary href="#projects">
             <span className="relative z-10 flex items-center justify-center gap-2">
               <span>View My Work</span>
               <svg
@@ -187,15 +268,12 @@ export default function HeroSection() {
               </svg>
             </span>
             <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-teal-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-          </motion.a>
+          </ActionButton>
 
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <ActionButton
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="relative border-2 border-teal-500 text-teal-600 px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden"
           >
             <span className="relative z-10 flex items-center justify-center gap-2">
               <FiDownload className="text-lg" />
@@ -206,14 +284,15 @@ export default function HeroSection() {
               <FiDownload className="mr-2" />
               Download CV
             </span>
-          </motion.a>
+          </ActionButton>
         </motion.div>
 
         {/* Scroll indicator */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
+          variants={fadeInVariants}
+          custom={5}
+          initial="hidden"
+          animate="visible"
           className="mt-16 animate-bounce"
         >
           <a

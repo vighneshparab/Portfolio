@@ -6,6 +6,7 @@ import Project from "../components/Project";
 import Skills from "../components/Skills";
 import ContactSection from "../components/ContactSection";
 import Footer from "../components/Footer";
+import EducationCertifications from "../components/EducationCertifications";
 
 function Index() {
   return (
@@ -15,6 +16,7 @@ function Index() {
       <About />
       <Project />
       <Skills />
+      <EducationCertifications />
       <ContactSection />
       <Footer />
     </>
