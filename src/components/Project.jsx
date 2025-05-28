@@ -11,7 +11,7 @@ export default function Projects() {
         "AI-powered platform offering crop recommendations based on location, weather, and soil data. Helping farmers optimize yields with data-driven insights.",
       image:
         "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-      link: "https://github.com/vighnesh129/farming-recommendation",
+      link: "https://github.com/vighneshparab/CropRecommendationApp-.git",
       liveLink: "#",
       tags: ["AI", "React", "Node.js"],
       type: "fullstack",
@@ -24,7 +24,7 @@ export default function Projects() {
         "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
       link: "https://github.com/vighnesh129/hostel-harmony-system",
       liveLink: "#",
-      tags: ["MERN", "Redux", "JWT"],
+      tags: ["PHP", "MYSQL"],
       type: "fullstack",
     },
     {
@@ -35,7 +35,7 @@ export default function Projects() {
         "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
       link: "https://github.com/vighnesh129/smart-office-system",
       liveLink: "#",
-      tags: ["IoT", "Next.js", "Firebase"],
+      tags: ["Next.js", "MongoDB", "Clerk", "Tailwind CSS"],
       type: "fullstack",
     },
     {
@@ -46,8 +46,8 @@ export default function Projects() {
         "https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
       link: "https://github.com/vighnesh129/travel-planner",
       liveLink: "#",
-      tags: ["React Native", "Maps API", "MongoDB"],
-      type: "mobile",
+      tags: ["React", "Stripe Paymet Gateway", "Chart.js"],
+      type: "fullstack",
     },
   ];
 
@@ -174,7 +174,7 @@ export default function Projects() {
           className="text-center mt-16"
         >
           <a
-            href="https://github.com/vighnesh129?tab=repositories"
+            href="https://github.com/vighneshparab?tab=repositories"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 transition-colors duration-300 shadow-lg hover:shadow-teal-500/30"

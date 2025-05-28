@@ -271,7 +271,7 @@ export default function HeroSection() {
           </ActionButton>
 
           <ActionButton
-            href="/resume.pdf"
+            href="/Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
           >

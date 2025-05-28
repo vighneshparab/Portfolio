@@ -174,7 +174,7 @@ export default function Navbar() {
                 <Github className="w-5 h-5" />
               </a>
               <a
-                href="https://linkedin.com/in/vighneshparab"
+                href="https://www.linkedin.com/in/vighnesh-parab-a210a9258"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-blue-600 transition-colors"
@@ -193,7 +193,7 @@ export default function Navbar() {
 
             {/* Resume Button */}
             <motion.a
-              href="/resume.pdf"
+              href="/Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="ml-6 flex items-center px-4 py-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-full text-sm font-medium shadow-sm hover:shadow-md transition-all duration-300"

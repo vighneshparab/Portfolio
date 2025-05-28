@@ -36,32 +36,13 @@ export const education = [
 // Certifications data
 export const certifications = [
   {
-    title: "AWS Certified Solutions Architect",
-    issuer: "Amazon Web Services",
-    year: "2023",
-    badge: "/aws-badge.png",
+    title: "Diploma In Software Engineering",
+    issuer: "RS Infotech",
+    year: "2022",
+    badge: "",
     credentialUrl: "https://www.credly.com/badges/12345",
     icon: <FaCloud className="text-2xl" />,
     skills: ["Cloud Architecture", "AWS Services", "Security"],
-  },
-  {
-    title: "Google Professional Data Engineer",
-    issuer: "Google Cloud",
-    year: "2022",
-    badge: "/google-badge.png",
-    credentialUrl: "https://www.credential.net/12345",
-    icon: <FaDatabase className="text-2xl" />,
-    skills: ["Big Data", "ML Pipeline", "Data Analytics"],
-  },
-  {
-    title: "Meta Front-End Developer",
-    issuer: "Meta (Facebook)",
-    year: "2023",
-    badge: "/meta-badge.png",
-    credentialUrl:
-      "https://www.coursera.org/professional-certificates/meta-front-end-developer",
-    icon: <FaReact className="text-2xl" />,
-    skills: ["React", "JavaScript", "Responsive Design"],
   },
 ];
 
@@ -69,7 +50,7 @@ export const certifications = [
 export const courses = [
   {
     title: "Advanced React and Redux",
-    platform: "Udemy",
+    platform: "Self",
     year: "2023",
     hours: "24",
     icon: <FaReact className="text-2xl" />,
@@ -79,8 +60,8 @@ export const courses = [
   },
   {
     title: "Machine Learning Specialization",
-    platform: "Coursera",
-    year: "2022",
+    platform: "Youtube",
+    year: "2024",
     hours: "60",
     icon: <FaBrain className="text-2xl" />,
     category: "data",
@@ -89,9 +70,9 @@ export const courses = [
   },
   {
     title: "Full-Stack Web Development",
-    platform: "edX",
-    year: "2023",
-    hours: "48",
+    platform: "RS INFOTECH",
+    year: "2022",
+    hours: "100",
     icon: <FaLaptopCode className="text-2xl" />,
     category: "frontend",
     completed: true,
@@ -99,7 +80,7 @@ export const courses = [
   },
   {
     title: "Data Science and Analytics",
-    platform: "DataCamp",
+    platform: "Self",
     year: "2023",
     hours: "30",
     icon: <FaDatabase className="text-2xl" />,
