@@ -181,17 +181,17 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="py-16 md:py-20 bg-gradient-to-b from-white to-teal-50 dark:from-gray-900 dark:to-gray-800"
+      className="py-16 md:py-20 bg-gradient-to-b from-white to-teal-50"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white mb-4 relative inline-block">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4 relative inline-block">
             Get In Touch
             <span className="absolute -bottom-2 left-0 w-full h-1 bg-teal-500 rounded-full transform scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></span>
           </h2>
           <div className="w-24 h-1 bg-teal-500 mx-auto mb-6 rounded-full"></div>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Have a question or want to work together? Feel free to contact me
             anytime!
           </p>
@@ -201,32 +201,30 @@ export default function ContactSection() {
         <div className="flex flex-col lg:flex-row lg:gap-8 xl:gap-12">
           {/* Contact Info Card */}
           <div className="lg:w-1/3 mb-8 lg:mb-0">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 h-full transition-transform duration-300 hover:scale-[1.02]">
-              <h3 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-white mb-6">
+            <div className="bg-white rounded-xl shadow-lg p-6 h-full transition-transform duration-300 hover:scale-[1.02]">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-6">
                 Contact Information
               </h3>
 
               <div className="space-y-5">
                 {contactInfo.map((info, index) => (
                   <div key={index} className="flex items-start">
-                    <div className="flex-shrink-0 bg-teal-100 dark:bg-teal-900 rounded-full p-2.5">
+                    <div className="flex-shrink-0 bg-teal-100 rounded-full p-2.5">
                       {info.icon}
                     </div>
                     <div className="ml-4">
-                      <h4 className="text-base md:text-lg font-medium text-gray-800 dark:text-gray-200">
+                      <h4 className="text-base md:text-lg font-medium text-gray-800">
                         {info.title}
                       </h4>
                       {info.href ? (
                         <a
                           href={info.href}
-                          className="text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors duration-300 mt-1 inline-block"
+                          className="text-teal-600 hover:text-teal-700 transition-colors duration-300 mt-1 inline-block"
                         >
                           {info.content}
                         </a>
                       ) : (
-                        <p className="text-gray-600 dark:text-gray-400 mt-1">
-                          {info.content}
-                        </p>
+                        <p className="text-gray-600 mt-1">{info.content}</p>
                       )}
                     </div>
                   </div>
@@ -235,7 +233,7 @@ export default function ContactSection() {
 
               {/* Social Links */}
               <div className="mt-10">
-                <h4 className="text-base md:text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">
+                <h4 className="text-base md:text-lg font-medium text-gray-800 mb-4">
                   Social Profiles
                 </h4>
                 <div className="flex gap-3">
@@ -246,7 +244,7 @@ export default function ContactSection() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.name}
-                      className="bg-gray-100 dark:bg-gray-700 hover:bg-teal-100 dark:hover:bg-teal-900 text-gray-800 dark:text-gray-200 hover:text-teal-600 dark:hover:text-teal-400 p-2.5 rounded-full transition-colors duration-300"
+                      className="bg-gray-100 hover:bg-teal-100 text-gray-800 hover:text-teal-600 p-2.5 rounded-full transition-colors duration-300"
                     >
                       {social.icon}
                     </a>
@@ -258,10 +256,10 @@ export default function ContactSection() {
 
           {/* Contact Form Card */}
           <div className="lg:w-2/3">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 relative overflow-hidden">
+            <div className="bg-white rounded-xl shadow-lg p-6 relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-teal-400 to-blue-500"></div>
 
-              <h3 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-white mb-6">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-6">
                 Send Me a Message
               </h3>
 
@@ -270,8 +268,8 @@ export default function ContactSection() {
                 <div
                   className={`mb-6 p-4 rounded-lg flex items-center animate-appear ${
                     formStatus.isSubmitted
-                      ? "bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-200"
-                      : "bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200"
+                      ? "bg-green-100 text-green-700"
+                      : "bg-red-100 text-red-700"
                   }`}
                 >
                   {formStatus.isSubmitted ? (
@@ -284,17 +282,12 @@ export default function ContactSection() {
               )}
 
               {/* Contact Form */}
-              <form
-                ref={formRef}
-                onSubmit={handleSubmit}
-                className="space-y-5 md:space-y-6"
-                noValidate
-              >
+              <div ref={formRef} className="space-y-5 md:space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
                   {/* Name Field */}
                   <div className="form-field-wrapper">
                     <div
-                      className={`relative border border-gray-300 dark:border-gray-600 rounded-lg transition-all duration-300 ${
+                      className={`relative border border-gray-300 rounded-lg transition-all duration-300 ${
                         formState.name ? "focused" : ""
                       }`}
                     >
@@ -307,13 +300,13 @@ export default function ContactSection() {
                         onChange={handleChange}
                         onFocus={handleFocus}
                         onBlur={handleBlur}
-                        className="block w-full px-4 pt-5 pb-2 text-gray-800 dark:text-gray-200 bg-transparent appearance-none focus:outline-none focus:ring-0 peer"
+                        className="block w-full px-4 pt-5 pb-2 text-gray-800 bg-transparent appearance-none focus:outline-none focus:ring-0 peer"
                         placeholder=" "
                         required
                       />
                       <label
                         htmlFor="name"
-                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3"
+                        className="absolute text-sm text-gray-500 duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3"
                       >
                         Your Name*
                       </label>
@@ -323,7 +316,7 @@ export default function ContactSection() {
                   {/* Email Field */}
                   <div className="form-field-wrapper">
                     <div
-                      className={`relative border border-gray-300 dark:border-gray-600 rounded-lg transition-all duration-300 ${
+                      className={`relative border border-gray-300 rounded-lg transition-all duration-300 ${
                         formState.email ? "focused" : ""
                       }`}
                     >
@@ -335,13 +328,13 @@ export default function ContactSection() {
                         onChange={handleChange}
                         onFocus={handleFocus}
                         onBlur={handleBlur}
-                        className="block w-full px-4 pt-5 pb-2 text-gray-800 dark:text-gray-200 bg-transparent appearance-none focus:outline-none focus:ring-0 peer"
+                        className="block w-full px-4 pt-5 pb-2 text-gray-800 bg-transparent appearance-none focus:outline-none focus:ring-0 peer"
                         placeholder=" "
                         required
                       />
                       <label
                         htmlFor="email"
-                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3"
+                        className="absolute text-sm text-gray-500 duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3"
                       >
                         Your Email*
                       </label>
@@ -352,7 +345,7 @@ export default function ContactSection() {
                 {/* Subject Field */}
                 <div className="form-field-wrapper">
                   <div
-                    className={`relative border border-gray-300 dark:border-gray-600 rounded-lg transition-all duration-300 ${
+                    className={`relative border border-gray-300 rounded-lg transition-all duration-300 ${
                       formState.subject ? "focused" : ""
                     }`}
                   >
@@ -364,12 +357,12 @@ export default function ContactSection() {
                       onChange={handleChange}
                       onFocus={handleFocus}
                       onBlur={handleBlur}
-                      className="block w-full px-4 pt-5 pb-2 text-gray-800 dark:text-gray-200 bg-transparent appearance-none focus:outline-none focus:ring-0 peer"
+                      className="block w-full px-4 pt-5 pb-2 text-gray-800 bg-transparent appearance-none focus:outline-none focus:ring-0 peer"
                       placeholder=" "
                     />
                     <label
                       htmlFor="subject"
-                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3"
+                      className="absolute text-sm text-gray-500 duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3"
                     >
                       Subject
                     </label>
@@ -379,7 +372,7 @@ export default function ContactSection() {
                 {/* Message Field */}
                 <div className="form-field-wrapper">
                   <div
-                    className={`relative border border-gray-300 dark:border-gray-600 rounded-lg transition-all duration-300 ${
+                    className={`relative border border-gray-300 rounded-lg transition-all duration-300 ${
                       formState.message ? "focused" : ""
                     }`}
                   >
@@ -391,13 +384,13 @@ export default function ContactSection() {
                       onChange={handleChange}
                       onFocus={handleFocus}
                       onBlur={handleBlur}
-                      className="block w-full px-4 pt-5 pb-2 text-gray-800 dark:text-gray-200 bg-transparent appearance-none focus:outline-none focus:ring-0 peer"
+                      className="block w-full px-4 pt-5 pb-2 text-gray-800 bg-transparent appearance-none focus:outline-none focus:ring-0 peer"
                       placeholder=" "
                       required
                     ></textarea>
                     <label
                       htmlFor="message"
-                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3"
+                      className="absolute text-sm text-gray-500 duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3"
                     >
                       Your Message*
                     </label>
@@ -407,7 +400,8 @@ export default function ContactSection() {
                 {/* Submit Button */}
                 <div className="text-right">
                   <button
-                    type="submit"
+                    type="button"
+                    onClick={handleSubmit}
                     disabled={formStatus.isSubmitting}
                     className={`inline-flex items-center px-5 py-2.5 md:px-6 md:py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-all duration-300 ${
                       formStatus.isSubmitting
@@ -448,7 +442,7 @@ export default function ContactSection() {
                     )}
                   </button>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>

@@ -2,8 +2,6 @@ import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import {
   FaGithub,
-  FaLinkedin,
-  FaEnvelope,
   FaCode,
   FaServer,
   FaPalette,
@@ -23,7 +21,6 @@ import {
 } from "react-icons/si";
 
 export default function About() {
-  // Memoize static data to prevent unnecessary re-renders
   const skills = useMemo(
     () => [
       {
@@ -72,7 +69,7 @@ export default function About() {
         name: "TypeScript",
       },
       {
-        icon: <SiNextdotjs className="text-2xl text-black dark:text-white" />,
+        icon: <SiNextdotjs className="text-2xl text-black" />,
         name: "Next.js",
       },
       {
@@ -100,7 +97,6 @@ export default function About() {
     []
   );
 
-  // Preload image for better performance
   React.useEffect(() => {
     const img = new Image();
     img.src = "https://avatars.githubusercontent.com/u/134200694?v=4";
@@ -109,22 +105,21 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-28 px-6 md:px-16 overflow-hidden"
+      className="relative bg-[#FBFCFD] dark:bg-[#FBFCFD] py-28 px-6 md:px-16 overflow-hidden"
     >
-      {/* Optimized decorative elements with reduced blur and animation complexity */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+      {/* Decorative elements with reduced opacity for better visibility on light background */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-5 pointer-events-none">
         <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-teal-400 mix-blend-multiply filter blur-lg animate-blob"></div>
         <div className="absolute top-40 right-20 w-40 h-40 rounded-full bg-pink-400 mix-blend-multiply filter blur-lg animate-blob animation-delay-2000"></div>
         <div className="absolute bottom-20 left-1/2 w-36 h-36 rounded-full bg-indigo-400 mix-blend-multiply filter blur-lg animate-blob animation-delay-4000"></div>
       </div>
 
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16 relative z-10">
-        {/* Image with optimized animation */}
         <motion.div
           initial={{ y: 0 }}
           animate={{ y: [-8, 8, -8] }}
           transition={{
-            duration: 8, // Slower animation for smoother performance
+            duration: 8,
             repeat: Infinity,
             ease: "easeInOut",
           }}
@@ -143,7 +138,6 @@ export default function About() {
           </div>
         </motion.div>
 
-        {/* Developer Info - Optimized motion props */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -165,36 +159,32 @@ export default function About() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-4"
+            className="text-gray-700 dark:text-gray-700 text-lg leading-relaxed mb-4"
           >
             I'm a passionate{" "}
-            <span className="font-semibold text-teal-600 dark:text-teal-400">
+            <span className="font-semibold text-teal-600 dark:text-teal-600">
               full-stack developer
             </span>{" "}
-            with expertise in modern web technologies. I specialize in creating
-            performant, accessible, and visually stunning digital experiences.
+            with expertise in modern web technologies.
           </motion.p>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="text-gray-600 dark:text-gray-400 text-md leading-relaxed mb-8"
+            className="text-gray-600 dark:text-gray-600 text-md leading-relaxed mb-8"
           >
             With a keen eye for design and a passion for clean code, I build
-            solutions that are not only functional but also delightful to use. I
-            believe in continuous learning and staying updated with the latest
-            industry trends.
+            solutions that are both functional and delightful to use.
           </motion.p>
 
-          {/* Skills - Reduced motion complexity */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
             className="mb-8"
           >
-            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
+            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-3">
               What I Do
             </h3>
             <div className="flex flex-wrap justify-center md:justify-start gap-2">
@@ -203,23 +193,21 @@ export default function About() {
                   key={index}
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white dark:bg-gray-700 shadow-sm border ${skill.color} border-opacity-20`}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-white shadow-sm border ${skill.color} border-opacity-20`}
                 >
                   {skill.icon}
-                  <span className="text-sm md:text-base">{skill.name}</span>
+                  <span className="text-sm">{skill.name}</span>
                 </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* Tech Stack - Optimized layout */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="mb-8"
           >
-            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
+            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-3">
               Tech I Love
             </h3>
             <div className="flex flex-wrap justify-center md:justify-start gap-3">
@@ -230,10 +218,10 @@ export default function About() {
                   whileTap={{ scale: 0.95 }}
                   className="flex flex-col items-center"
                 >
-                  <div className="p-2 md:p-3 rounded-full bg-white dark:bg-gray-700 shadow-md">
+                  <div className="p-2 rounded-full bg-white dark:bg-white shadow-md">
                     {tech.icon}
                   </div>
-                  <span className="text-xs mt-1 text-gray-600 dark:text-gray-300">
+                  <span className="text-xs mt-1 text-gray-600 dark:text-gray-600">
                     {tech.name}
                   </span>
                 </motion.div>

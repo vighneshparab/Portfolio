@@ -1,6 +1,5 @@
 import {
   FaGraduationCap,
-  FaCertificate,
   FaBook,
   FaLaptopCode,
   FaReact,
